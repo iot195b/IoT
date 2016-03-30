@@ -25,4 +25,4 @@ while(true):
                 		GPIO.output(23,True)
 				time.sleep(0.2)
 				GPIO.output(23,False)
-				else: print 'error'
+			else: print 'error'
