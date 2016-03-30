@@ -12,7 +12,7 @@ server_address = ('', 9801)
 print >>sys.stderr, 'starting up on %s port %s' % server_address
 sock.bind(server_address)
 sock.listen(1)
-
+-
 while True:
     try:
     	cnx=mysql.connector.connect(user= 'root',password= 'sheridan1',host= 'localhost',database= 'iot')
@@ -35,6 +35,7 @@ while True:
         print >>sys.stderr, 'client connected:', client_address
         message = data
     	print >>sys.stderr, 'sending "%s"' % message
-    	sock.send(message)
+    	connection.send(message)
+    	print connection.recv(1024)
     finally:
 	connection.close()

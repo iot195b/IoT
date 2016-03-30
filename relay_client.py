@@ -1,3 +1,4 @@
+import socket
 import RPi.GPIO as GPIO, time
 import urllib2
 GPIO.setwarnings(False)
@@ -12,16 +13,15 @@ while(true):
     	sock.connect(server_address)
 	try:
 		while True:
-        		data = connection.recv(16)
+        		data = sock.recv(16)
 			print data
         		break
     	finally:
-        	try:
-                	if data=='ON':
+                	if data=='on':
                 		GPIO.output(18,True)
 				time.sleep(0.2)
 				GPIO.output(18,False)
-                	elif data=='OFF':
+                	elif data=='off':
                 		GPIO.output(23,True)
 				time.sleep(0.2)
 				GPIO.output(23,False)
