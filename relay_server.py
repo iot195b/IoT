@@ -14,31 +14,27 @@ sock.bind(server_address)
 sock.listen(1)
 
 while True:
-    print >>sys.stderr, 'waiting for a connection'
-    connection, client_address = sock.accept()
-	try:
-        cnx=mysql.connector.connect(user= 'root',password= 'sheridan1',host= 'localhost',database= 'iot')
-        except mysql.connector.Error as e:
-            if e.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-                print ("username/password error")
-            else:
-                print(e)
-        cur= cnx.cursor()
-        sql= "SELECT * from relay where id= 1"
-        cur.execute(sql)
-		results= cursor.fetchall()
-		for row in results:
-		data= row[1]	
-        cur.close()
-        cnx.close()
-        connection.close()
     try:
+    	cnx=mysql.connector.connect(user= 'root',password= 'sheridan1',host= 'localhost',database= 'iot')
+    except mysql.connector.Error as e:
+    	if e.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+                print ("username/password error")
+        else:
+        	print(e)
+    cur= cnx.cursor()
+    sql= "SELECT * from relay where id= 1"
+    cur.execute(sql)
+    results= cur.fetchall()
+    for row in results:
+	data= row[1]	
+    cur.close()
+    cnx.close()
+    try:
+	print >>sys.stderr, 'waiting for a connection'
+    	connection, client_address = sock.accept()
         print >>sys.stderr, 'client connected:', client_address
         message = data
     	print >>sys.stderr, 'sending "%s"' % message
-    	sock.sendall(message)
-        print >>sys.stderr, 'received "%s"' % data
-		data = sock.recv(16)
-		print data
+    	sock.send(message)
     finally:
-		sock.close()
+	connection.close()
