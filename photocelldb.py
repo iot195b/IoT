@@ -3,7 +3,7 @@ import time
 import sys
 import RPi.GPIO as GPIO, time
 GPIO.setmode(GPIO.BCM)
- pstatus=' '	
+pstatus=' '	
 # Main program loop
 while True:
   
