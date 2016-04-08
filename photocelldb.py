@@ -3,10 +3,10 @@ import time
 import sys
 import RPi.GPIO as GPIO, time
 GPIO.setmode(GPIO.BCM)
-
+ pstatus=' '	
 # Main program loop
 while True:
-    pstatus=' '	
+  
     time.sleep(2)
     measurement = 0
     GPIO.setup(17, GPIO.OUT)
