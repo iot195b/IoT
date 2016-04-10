@@ -3,6 +3,7 @@ import sys
 import mysql.connector 
 from mysql.connector import errorcode
 import smtplib
+import time
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -33,9 +34,12 @@ while True:
                 	print ("username/password error")
             	else:
                 	print(e)
+        now = time.strftime("%c")
         cur= cnx.cursor()
         cur.execute("UPDATE photocell SET status = %s WHERE id= %s",(data,1))
         cnx.commit()
         cur.close()
+        cur.execute("UPDATE photocell SET timestamp = %s WHERE id= %s",(now,1))
+        cnx.commit()
         cnx.close()
         connection.close()
