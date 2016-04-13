@@ -3,10 +3,10 @@ import time
 import sys
 import RPi.GPIO as GPIO, time
 GPIO.setmode(GPIO.BCM)
-
+pstatus=' '	
 # Main program loop
 while True:
-    pstatus=' '	
+
     time.sleep(2)
     measurement = 0
     GPIO.setup(17, GPIO.OUT)
@@ -21,9 +21,7 @@ while True:
 	status= 'Dark'
     else: 
 	status= 'Light'
-    if status == pstatus:
-	a=b
-    else:
+    if status != pstatus:
 	pstatus = status
     	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     	server_address = ('54.191.150.101', 9800)
