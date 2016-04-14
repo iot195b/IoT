@@ -6,11 +6,6 @@ GPIO.setmode(GPIO.BCM)
 pstatus=' '	
 # Main program loop
 while True:
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 65c9ab134fe1cca9e484e7320603984c53fe9c50
     time.sleep(2)
     measurement = 0
     GPIO.setup(17, GPIO.OUT)
